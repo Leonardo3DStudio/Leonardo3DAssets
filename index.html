@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CC1G9PD4QT"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CC1G9PD4QT');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leonardo 3D Assets — High-Fidelity 3D Assets</title>
+  <meta name="description" content="Premium 3D models, cinematic scenes, and optimized assets for professional creators." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #0a0a0a;
+      --accent: #ff5c00; 
+      --accent-soft: rgba(255, 92, 0, 0.1);
+      --text-main: #ffffff;
+      --text-muted: #a1a1a1;
+      --border: #222222;
+      --font-serif: 'Instrument Serif', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { background: var(--bg); color: var(--text-main); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; }
+
+    /* ─── NAVIGATION ────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 24px; left: 50%;
+      transform: translateX(-50%);
+      width: 90%; max-width: 1100px;
+      padding: 12px 24px;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 1000;
+    }
+    .logo { font-family: var(--font-serif); font-size: 1.4rem; color: #fff; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; transition: var(--transition); }
+    .nav-links a:hover { color: var(--accent); }
+    .btn-nav { background: var(--accent); color: white; padding: 10px 20px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; transition: var(--transition); }
+
+    /* ─── HERO ──────────────────────────────────────── */
+    #hero { padding: 180px 6vw 100px; text-align: center; max-width: 1200px; margin: 0 auto; }
+    h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; font-weight: 400; margin-bottom: 24px; }
+    h1 i { font-style: italic; color: var(--accent); }
+    .hero-sub { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; }
+
+    /* ─── ASSET GRID ────────────────── */
+    #store { padding: 60px 6vw; max-width: 1300px; margin: 0 auto; }
+    .section-title { 
+      font-family: var(--font-serif); 
+      font-size: 3.5rem; 
+      text-align: center; 
+      margin-bottom: 60px; 
+      font-weight: 400;
+    }
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+    
+    .asset-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+    .asset-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    
+    .asset-thumb {
+      width: 100%; aspect-ratio: 4/3; background: #111;
+      position: relative; overflow: hidden;
+      cursor: ew-resize;
+    }
+
+    /* ─── IMAGE SLIDER LOGIC ─── */
+    .slider-container { position: relative; width: 100%; height: 100%; }
+    .slider-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .img-overlay { width: 50%; overflow: hidden; z-index: 2; border-right: 2px solid var(--accent); }
+    .img-overlay img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    /* Image scaling fix */
+    .img-overlay img { width: 410px; } 
+    @media (max-width: 1100px) { .img-overlay img { width: 100vw; } }
+
+    .slider-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+    .slider-handle {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 30px; height: 30px; background: var(--accent); border: 4px solid #000; border-radius: 50%; z-index: 5; pointer-events: none;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .slider-handle::before { content: ''; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 6px solid white; margin-right: 2px; }
+    .slider-handle::after { content: ''; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 6px solid white; margin-left: 2px; }
+
+    .poly-badge {
+      position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+      padding: 4px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; color: var(--accent);
+      border: 1px solid var(--accent); z-index: 11;
+    }
+
+    .asset-info { padding: 24px; padding-bottom: 32px; }
+    .asset-info h3 { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; }
+
+    /* ─── PERFORMANCE GRID ─── */
+    .features-grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+    @media (max-width: 900px) {
+      .store-grid { grid-template-columns: 1fr; }
+      .features-grid-3col { grid-template-columns: 1fr; }
+      h1 { font-size: 3.5rem; }
+      .section-title { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">Leonardo <span>3D Assets</span></a>
+    <ul class="nav-links">
+      <li><a href="#store">Catalog</a></li>
+      <li><a href="#features">Aspects</a></li>
+    </ul>
+    <a href="#contact" class="btn-nav">3D Assets</a>
+  </nav>
+
+  <section id="hero">
+    <h1>Professional <i>3D Assets</i> for Brands and Creators.</h1>
+    <p class="hero-sub">Production-ready models and optimized master-scenes for Blender & Unreal Engine.</p>
+  </section>
+
+  <section id="store">
+    <!-- Catalog Headline -->
+    <h2 class="section-title reveal">Catalog</h2>
+
+    <div class="store-grid">
+      
+      <!-- Asset 1 -->
+      <div class="asset-card reveal">
+        <div class="asset-thumb">
+          <div class="poly-badge">173k Polys</div>
+          <div class="slider-container">
+            <img src="Refazendo assets sem logo/Guarana Can 2.webp" class="slider-img"> 
+            <div class="img-overlay slider-img">
+                <img src="Refazendo assets sem logo/Guarana Can 1.webp">
+            </div>
+            <div class="slider-handle"></div>
+            <input type="range" min="0" max="100" value="50" class="slider-input" oninput="handleSlider(this)">
+          </div>
+        </div>
+        <div class="asset-info">
+          <h3>Soda Can</h3>
+        </div>
+      </div>
+
+      <!-- Asset 2 -->
+      <div class="asset-card reveal" style="transition-delay: 0.1s;">
+        <div class="asset-thumb">
+          <div class="poly-badge">87k Polys (72 + 15)</div>
+          <div class="slider-container">
+            <img src="Refazendo assets sem logo/Guarana Fruit 2.webp" class="slider-img"> 
+            <div class="img-overlay slider-img">
+                <img src="Refazendo assets sem logo/Guarana Fruit 1.webp">
+            </div>
+            <div class="slider-handle"></div>
+            <input type="range" min="0" max="100" value="50" class="slider-input" oninput="handleSlider(this)">
+          </div>
+        </div>
+        <div class="asset-info">
+          <h3>Guarana Fruit</h3>
+        </div>
+      </div>
+
+      <!-- Asset 3 -->
+      <div class="asset-card reveal" style="transition-delay: 0.2s;">
+        <div class="asset-thumb">
+          <div class="poly-badge">370k Polys</div>
+          <div class="slider-container">
+            <img src="Refazendo assets sem logo/Headphone 2.webp" class="slider-img"> 
+            <div class="img-overlay slider-img">
+                <img src="Refazendo assets sem logo/Headphone 1.webp">
+            </div>
+            <div class="slider-handle"></div>
+            <input type="range" min="0" max="100" value="50" class="slider-input" oninput="handleSlider(this)">
+          </div>
+        </div>
+        <div class="asset-info">
+          <h3>Headphone</h3>
+        </div>
+      </div>
+
+      <!-- Asset 4 -->
+      <div class="asset-card reveal">
+        <div class="asset-thumb">
+          <div class="poly-badge">176k Polys</div>
+          <div class="slider-container">
+            <img src="Refazendo assets sem logo/Cosmetics Bottle 2.webp" class="slider-img"> 
+            <div class="img-overlay slider-img">
+                <img src="Refazendo assets sem logo/Cosmetics Bottle 1.webp">
+            </div>
+            <div class="slider-handle"></div>
+            <input type="range" min="0" max="100" value="50" class="slider-input" oninput="handleSlider(this)">
+          </div>
+        </div>
+        <div class="asset-info">
+          <h3>Cosmetic Bottle</h3>
+        </div>
+      </div>
+
+      <!-- Asset 5 -->
+      <div class="asset-card reveal" style="transition-delay: 0.1s;">
+        <div class="asset-thumb">
+          <div class="poly-badge">375k Polys</div>
+          <div class="slider-container">
+            <img src="Refazendo assets sem logo/Chocolate and Vanilla Popsicle 2.webp" class="slider-img"> 
+            <div class="img-overlay slider-img">
+                <img src="Refazendo assets sem logo/Chocolate and Vanilla Popsicle 1.webp">
+            </div>
+            <div class="slider-handle"></div>
+            <input type="range" min="0" max="100" value="50" class="slider-input" oninput="handleSlider(this)">
+          </div>
+        </div>
+        <div class="asset-info">
+          <h3>Chocolate & Vanilla Popsicle</h3>
+        </div>
+      </div>
+
+      <!-- Asset 6 -->
+      <div class="asset-card reveal" style="transition-delay: 0.2s;">
+        <div class="asset-thumb">
+          <div class="poly-badge">550k Polys</div>
+          <div class="slider-container">
+            <img src="Refazendo assets sem logo/Phone 2.webp" class="slider-img"> 
+            <div class="img-overlay slider-img">
+                <img src="Refazendo assets sem logo/Phone 1.webp">
+            </div>
+            <div class="slider-handle"></div>
+            <input type="range" min="0" max="100" value="50" class="slider-input" oninput="handleSlider(this)">
+          </div>
+        </div>
+        <div class="asset-info">
+          <h3>Phone</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REASONS SECTION -->
+  <section id="features" style="padding: 120px 6vw; max-width: 1200px; margin: 0 auto;">
+    <h2 style="font-family: var(--font-serif); font-size: 3rem; text-align: center; margin-bottom: 60px;">Engineered for <i>Performance</i></h2>
+    <div class="features-grid-3col">
+        <div class="reveal" style="background: var(--card); padding: 40px; border-radius: 24px; border: 1px solid var(--border);">
+            <h4 style="margin-bottom: 15px; color: var(--accent);">Clean Topology</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Every model is manually retopologized to ensure zero artifacts and smooth subdivision.</p>
+        </div>
+        <div class="reveal" style="background: var(--card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); transition-delay: 0.1s;">
+            <h4 style="margin-bottom: 15px; color: var(--accent);">PBR Standards</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Industry standard textures (Albedo, Roughness, Normal, Metallic) compatible with any engine.</p>
+        </div>
+        <div class="reveal" style="background: var(--card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); transition-delay: 0.2s;">
+            <h4 style="margin-bottom: 15px; color: var(--accent);">Easy Integration</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Optimized pivot points and real-world scale for immediate drag-and-drop workflow.</p>
+        </div>
+    </div>
+  </section>
+
+  <footer style="padding: 60px 6vw; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+    <p>© 2026 LEONARDO 3D ASSETS. ALL MODELS PROTECTED BY STANDARD LICENSE.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+        observer.observe(el);
+    });
+
+    function handleSlider(input) {
+        const value = input.value;
+        const container = input.parentElement;
+        const overlay = container.querySelector('.img-overlay');
+        const handle = container.querySelector('.slider-handle');
+        overlay.style.width = value + '%';
+        handle.style.left = value + '%';
+        const img = overlay.querySelector('img');
+        img.style.width = container.offsetWidth + 'px';
+    }
+
+    window.addEventListener('resize', () => {
+        document.querySelectorAll('.slider-input').forEach(input => handleSlider(input));
+    });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.slider-input').forEach(input => handleSlider(input));
+    });
+
+    const style = document.createElement('style');
+    style.innerHTML = '.visible { opacity: 1 !important; transform: translateY(0) !important; }';
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
